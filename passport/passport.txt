@@ -1,0 +1,219 @@
+whoami && id
+ubuntu
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
+Вывод показывают, что текущий пользователь — ubuntu с UID/GID 1000, и он входит в группу sudo
+uname -a
+Linux sysadmin-host 5.15.0-198-generic #208-Ubuntu SMP Fri Sep 4 10:22:38 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+Вывод показывает, что хост называется sysadmin-host, работает на Linux-ядре 5.15.0-198-generic и имеет архитектуру x86_64
+cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+Вывод показывает, что установлена Ubuntu 22.04.5 LTS с кодовым именем jammy
+uptime
+ 15:54:01 up 21:36,  1 user,  load average: 0.07, 0.21, 0.10
+Вывод показывает, что система работает 21 час 36 минут, в ней один пользователь, а средняя нагрузка низкая
+free -h
+               total        used        free      shared  buff/cache   available
+Mem:           1.9Gi       207Mi       577Mi       0.0Ki       1.1Gi       1.5Gi
+Swap:             0B          0B          0B
+Вывод показывает, что объём оперативной памяти около 1.9 ГиБ, доступно около 1.5 ГиБ, а swap не настроен
+df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           190M  928K  189M   1% /run
+/dev/sda1       9.6G  1.9G  7.7G  20% /
+tmpfs           950M     0  950M   0% /dev/shm
+tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/sda15      105M  6.1M   99M   6% /boot/efi
+tmpfs           190M  4.0K  190M   1% /run/user/1000
+Вывод показывает, что корневой раздел /dev/sda1 занят на 20% и имеет около 7.7 ГиБ свободного места
+lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0     7:0    0    74M  1 loop /snap/core22/2955
+loop1     7:1    0  44.7M  1 loop /snap/snapd/28254
+loop2     7:2    0 115.2M  1 loop /snap/lxd/40911
+sda       8:0    0    10G  0 disk
+├─sda1    8:1    0   9.9G  0 part /
+├─sda14   8:14   0     4M  0 part
+└─sda15   8:15   0   106M  0 part /boot/efi
+sr0      11:0    1    54K  1 rom
+Вывод показывает, что основной диск sda размером 10 ГиБ разбит на корневой раздел, служебный раздел и EFI-раздел, а snap-пакеты подключены через loop-устройства
+nproc
+2
+Вывод показывает, что системе доступно два процессорных ядра
+ps aux | head -20
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.6 102064 13028 ?        Ss   Oct24   0:01 /lib/systemd/systemd --system --deserialize 31
+root           2  0.0  0.0      0     0 ?        S    Oct24   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   Oct24   0:00 [rcu_gp]
+root           4  0.0  0.0      0     0 ?        I<   Oct24   0:00 [rcu_par_gp]
+root           5  0.0  0.0      0     0 ?        I<   Oct24   0:00 [slub_flushwq]
+root           6  0.0  0.0      0     0 ?        I<   Oct24   0:00 [netns]
+root           8  0.0  0.0      0     0 ?        I<   Oct24   0:00 [kworker/0:0H-events_highpri]
+root          10  0.0  0.0      0     0 ?        I<   Oct24   0:00 [mm_percpu_wq]
+root          11  0.0  0.0      0     0 ?        S    Oct24   0:00 [rcu_tasks_rude_]
+root          12  0.0  0.0      0     0 ?        S    Oct24   0:00 [rcu_tasks_trace]
+root          13  0.0  0.0      0     0 ?        S    Oct24   0:00 [ksoftirqd/0]
+root          14  0.0  0.0      0     0 ?        I    Oct24   0:00 [rcu_sched]
+root          15  0.0  0.0      0     0 ?        S    Oct24   0:00 [migration/0]
+root          16  0.0  0.0      0     0 ?        S    Oct24   0:00 [idle_inject/0]
+root          18  0.0  0.0      0     0 ?        S    Oct24   0:00 [cpuhp/0]
+root          19  0.0  0.0      0     0 ?        S    Oct24   0:00 [cpuhp/1]
+root          20  0.0  0.0      0     0 ?        S    Oct24   0:00 [idle_inject/1]
+root          21  0.0  0.0      0     0 ?        S    Oct24   0:00 [migration/1]
+root          22  0.0  0.0      0     0 ?        S    Oct24   0:00 [ksoftirqd/1]
+Вывод показывает, что в первых строках списка процессов преобладают systemd и потоки ядра, без заметной пользовательской нагрузки
+top -bn1 | head -20 # снять снимок без интерактива
+top - 15:55:30 up 21:38,  1 user,  load average: 0.01, 0.15, 0.09
+Tasks: 101 total,   1 running, 100 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  3.4 us,  3.4 sy,  0.0 ni, 93.1 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :   1898.2 total,    576.6 free,    208.6 used,   1113.1 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   1521.0 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  16050 ubuntu    20   0   17228   8176   5736 S   6.7   0.4   0:00.53 sshd
+      1 root      20   0  102064  13028   8320 S   0.0   0.7   0:01.96 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.01 kthreadd
+      3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_par_gp
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 slub_flushwq
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 netns
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-events_highpri
+     10 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 mm_percpu_wq
+     11 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_tasks_rude_
+     12 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_tasks_trace
+     13 root      20   0       0      0      0 S   0.0   0.0   0:00.12 ksoftirqd/0
+     14 root      20   0       0      0      0 I   0.0   0.0   0:00.38 rcu_sched
+Вывод показывает, что система в основном простаивает: idle около 93%, всего 101 задача, и только sshd имеет небольшую нагрузку
+cat /proc/meminfo | head -10
+MemTotal:        1943796 kB
+MemFree:          589424 kB
+MemAvailable:    1556556 kB
+Buffers:           41856 kB
+Cached:          1035008 kB
+SwapCached:            0 kB
+Active:           693772 kB
+Inactive:         445536 kB
+Active(anon):        928 kB
+Inactive(anon):    71520 kB
+Вывод показывает, что общий объём памяти около 1.94 ГБ, доступно около 1.56 ГБ, а кэш занимает около 1.03 ГБ
+ls -l /etc/ | head -15
+total 828
+drwxr-xr-x 2 root root       4096 Oct  4 13:54 PackageKit
+drwxr-xr-x 4 root root       4096 Oct  4 13:53 X11
+-rw-r--r-- 1 root root       3028 Oct  4 13:52 adduser.conf
+drwxr-xr-x 2 root root       4096 Oct  4 13:56 alternatives
+drwxr-xr-x 3 root root       4096 Oct  4 13:53 apparmor
+drwxr-xr-x 8 root root       4096 Oct 16 16:36 apparmor.d
+drwxr-xr-x 3 root root       4096 Oct  4 13:54 apport
+drwxr-xr-x 8 root root       4096 Oct  4 13:56 apt
+-rw-r--r-- 1 root root       2319 Jan  6  2022 bash.bashrc
+-rw-r--r-- 1 root root         45 Nov 11  2021 bash_completion
+drwxr-xr-x 2 root root       4096 Oct  4 13:54 bash_completion.d
+-rw-r--r-- 1 root root        367 Dec 16  2020 bindresvport.blacklist
+drwxr-xr-x 2 root root       4096 Apr  7  2022 binfmt.d
+drwxr-xr-x 2 root root       4096 Oct  4 13:53 byobu
+Вывод показывает, что первые записи в /etc принадлежат root и являются системными конфигурационными файлами и каталогами
+cat /proc/cpuinfo | grep "model name" | uniq
+model name      : 12th Gen Intel(R) Core(TM) i5-12400F
+Вывод показывает, что в системе установлен процессор Intel Core i5-12400F 12-го поколения
+pstree -p | head -30 || ps -ef --forest | head -30   # pstree иногда не установлен — ps --forest не требует установки
+systemd(1)-+-agetty(806)
+           |-cron(737)
+           |-dbus-daemon(738)
+           |-irqbalance(743)---{irqbalance}(759)
+           |-multipathd(423)-+-{multipathd}(428)
+           |                 |-{multipathd}(429)
+           |                 |-{multipathd}(430)
+           |                 |-{multipathd}(431)
+           |                 |-{multipathd}(432)
+           |                 `-{multipathd}(433)
+           |-networkd-dispat(744)
+           |-packagekitd(1840)-+-{packagekitd}(1841)
+           |                   `-{packagekitd}(1842)
+           |-polkitd(1844)-+-{polkitd}(1845)
+           |               `-{polkitd}(1847)
+           |-rsyslogd(747)-+-{rsyslogd}(775)
+           |               |-{rsyslogd}(776)
+           |               `-{rsyslogd}(777)
+           |-snapd(7778)-+-{snapd}(7786)
+           |             |-{snapd}(7787)
+           |             |-{snapd}(7788)
+           |             |-{snapd}(7789)
+           |             |-{snapd}(7790)
+           |             |-{snapd}(7793)
+           |             |-{snapd}(7794)
+           |             `-{snapd}(7971)
+           |-sshd(8703)---sshd(8781)
+           |-sshd(15102)-+-sshd(15969)---sshd(16050)
+           |             `-sshd(19930)---sshd(20028)---bash(20029)-+-head(31026)
+           |                                                       `-pstree(31025)
+Вывод показывает, что дерево процессов начинается с systemd с PID 1, а среди служб видны sshd, cron, dbus, snapd и активная SSH-сессия с bash
+cat /proc/1/status  # PID 1 — это что?
+Name:   systemd
+Umask:  0000
+State:  S (sleeping)
+Tgid:   1
+Ngid:   0
+Pid:    1
+PPid:   0
+TracerPid:      0
+Uid:    0       0       0       0
+Gid:    0       0       0       0
+FDSize: 256
+Groups:
+NStgid: 1
+NSpid:  1
+NSpgid: 1
+NSsid:  1
+VmPeak:   166232 kB
+VmSize:   102064 kB
+VmLck:         0 kB
+VmPin:         0 kB
+VmHWM:     13028 kB
+VmRSS:     13028 kB
+RssAnon:            4708 kB
+RssFile:            8320 kB
+RssShmem:              0 kB
+VmData:    19676 kB
+VmStk:      1036 kB
+VmExe:       896 kB
+VmLib:      9064 kB
+VmPTE:        80 kB
+VmSwap:        0 kB
+HugetlbPages:          0 kB
+CoreDumping:    0
+THP_enabled:    1
+Threads:        1
+SigQ:   0/7376
+SigPnd: 0000000000000000
+ShdPnd: 0000000000000000
+SigBlk: 7be3c0fe28014a03
+SigIgn: 0000000000001000
+SigCgt: 00000001000004ec
+CapInh: 0000000000000000
+CapPrm: 000001ffffffffff
+CapEff: 000001ffffffffff
+CapBnd: 000001ffffffffff
+CapAmb: 0000000000000000
+NoNewPrivs:     0
+Seccomp:        0
+Seccomp_filters:        0
+Speculation_Store_Bypass:       thread vulnerable
+SpeculationIndirectBranch:      conditional enabled
+Cpus_allowed:   3
+Cpus_allowed_list:      0-1
+Mems_allowed:   00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:      0
+voluntary_ctxt_switches:        5282
+nonvoluntary_ctxt_switches:     2160
+Вывод показывает, что PID 1 имеет имя systemd, находящийся в состоянии сна и имеющий доступ к CPU 0–1
