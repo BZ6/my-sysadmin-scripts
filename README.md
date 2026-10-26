@@ -33,3 +33,20 @@
 
 <img width="598" height="192" alt="Снимок экрана 2026-10-26 175602" src="https://github.com/user-attachments/assets/6717e68b-acfa-427a-a2cd-2b0e75f7d65c" />
 
+### Часть 2
+
+- nginx -t
+
+<img width="602" height="60" alt="Снимок экрана 2026-10-26 194914" src="https://github.com/user-attachments/assets/00d478ab-630c-49cd-a499-343d2a024640" />
+
+- curl -kI https://172.18.82.1/
+
+<img width="682" height="162" alt="Снимок экрана 2026-10-26 195236" src="https://github.com/user-attachments/assets/a312b354-3cdf-44bf-afc7-d6df52b11ace" />
+
+- systemctl status my-app
+
+<img width="943" height="329" alt="Снимок экрана 2026-10-26 194959" src="https://github.com/user-attachments/assets/a694e394-85ff-40fe-8d9c-7510e0498811" />
+
+- journalctl -u my-app + tail -f /var/log/nginx/access.log
+
+<img width="962" height="1028" alt="Снимок экрана 2026-10-26 195201" src="https://github.com/user-attachments/assets/cc221ea5-01af-47a0-a479-5b4e256ed280" />
