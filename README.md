@@ -21,6 +21,10 @@
 
 <img width="917" height="172" alt="Снимок экрана 2026-10-26 175530" src="https://github.com/user-attachments/assets/f09edc85-07a3-4c05-ae75-b92b47aacab1" />
 
+- docker compose up + docker compose ps -a + docker compose down
+
+<img width="937" height="723" alt="Снимок экрана 2026-10-26 181700" src="https://github.com/user-attachments/assets/cadcdef1-f7a4-4231-aa50-959a3c97c627" />
+
 - cat /proc/mdstat
 
 <img width="782" height="116" alt="Снимок экрана 2026-10-26 175550" src="https://github.com/user-attachments/assets/a3163665-7417-4d5a-8dc2-24b93bff038f" />
